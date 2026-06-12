@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial_scale=1.0">
+    <title>Add</title>
+</head>
+
+<body>
+
+<header>
+    <h2 class="logo">Shelve</h2>
+    <img src="logo.png" alt="Shelve logo">
+</header>
+
+<main>
+    <section class="add_book">
+        <form id="book_form">
+
+            <label for="title">Book Title</label>
+
+            <div class="book-search">
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter the book's name"
+                    required
+                >
+
+                <button
+                    id="find-book-btn"
+                >
+                    Find Book
+                </button>
+            </div>
+
+            <div class="cover-preview">
+                <img
+                    id="cover-preview"
+                    src=""
+                    alt="Book Cover"
+                >
+            </div>
+
+
+            <label for="author">Book Author</label>
+            <input
+                type="input"
+                id="author"
+                placeholder="Enter the book's author"
+                required
+            >
+
+            <label for="category">Category</label>
+            <select id="category">
+
+                <option value="">Select Category</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Self-Help">Self-Help</option>
+                <option value="Biography">Biography</option>
+                <option value="Academic">Academic</option>
+
+            </select>
+
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                rows="4"
+                placeholder="Optional notes about the book"
+            ></textarea>
+
+            <label for="cover">Book Cover</label>
+            <input
+                type="file"
+                id="cover"
+                accept="image/*"
+            >
+
+            <button type="submit">
+                Add Book
+            </button>
+
+        </form>
+    </section>
+
+</main>
+
+<footer>
+    <nav>
+        <a href="index.html" class="nav-active">Home</a>
+        <a href="search.html" class="nav">Search</a>
+        <a href="add.html" class="nav">Add</a>
+        <a href="profile.html" class="nav">Profile</a>
+    </nav>
+</footer>
+
+</body>
+</html>
