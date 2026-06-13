@@ -1,4 +1,4 @@
-const signup_form = document.querySelector("signup-form");
+const signup_form = document.querySelector("#signup-form");
 
 
 signup_form.addEventListener("submit", async function login(e) {
@@ -21,10 +21,10 @@ signup_form.addEventListener("submit", async function login(e) {
             },
 
             body: JSON.stringify({
-                username,
-                flat_no,
-                phone_no,
-                password
+                username: name,
+                flat_no: flat,
+                phone_no: phone,
+                password: pass
             })
         }
     );

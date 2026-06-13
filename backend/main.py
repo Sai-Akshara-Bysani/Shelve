@@ -18,14 +18,25 @@ def signup(user: UserSignup):
     cursor = conn.cursor()
 
     query = """
-    INSERT INTO users(username,flat_no,phone_no,password)
+    INSERT INTO users(name, flat_number, phone_number, password_hash)
     VALUES(%s,%s,%s,%s)
     """
 
-    cursor.execute(
-        query,
-        (user.username, user.flat_no, user.phone_no, user.password)
-    )
+    from fastapi import HTTPException
+    import mysql.connector
+
+    try:
+        cursor.execute(
+            query,
+            (user.username, user.flat_no, user.phone_no, user.password)
+        )
+        conn.commit()
+
+    except mysql.connector.IntegrityError:
+        raise HTTPException(
+            status_code=400,
+            detail="Flat number already registered"
+        )
 
     conn.commit()
 
@@ -46,7 +57,7 @@ def login(user : LoginUser):
 
     query = """
     SELECT * FROM users
-    WHERE flat_no=%s AND password=%s
+    WHERE flat_number=%s AND password_hash=%s
     """
 
     cursor.execute(
@@ -62,9 +73,14 @@ def login(user : LoginUser):
     if result:
         return {
             "success": True,
-            "username": result["username"]
+            "username": result["name"]
         }
 
     return {
         "success": False
     }
+
+@app.get("/")
+def home():
+    return {"message": "Shelve backend is working 🚀"}
+
