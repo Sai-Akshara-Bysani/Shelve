@@ -56,11 +56,17 @@ function renderBooks(books) {
 
     booksContainer.innerHTML = books.map(book => `
         <div class="book-card">
-            <h3>${book.title}</h3>
-            <p><strong>Author:</strong> ${book.author}</p>
-            <p><strong>Genre:</strong> ${book.genre}</p>
+            <h4>${book.title}</h4>
+            <p>${book.author}</p>
+            <p>${book.genre}</p>
             <p><strong>Status:</strong> ${book.status}</p>
-            <p><strong>ISBN:</strong> ${book.isbn}</p>
+
+            <button onclick="contactOwner(
+                '${book.owner_flat}',
+                '${book.title}'
+            )">
+                Interested
+            </button>
         </div>
     `).join("");
 }
@@ -73,3 +79,25 @@ searchInput.addEventListener("keypress", (e) => {
 
 categorySelect.addEventListener("change", fetchBooks);
 availabilityFilter.addEventListener("change", fetchBooks);
+
+async function contactOwner(ownerFlat, bookTitle) {
+
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/user/${ownerFlat}`);
+        const owner = await res.json();
+
+        const phone = owner.phone_number;
+
+        const message = encodeURIComponent(
+            `Hi ${owner.name}, I'm interested in your book "${bookTitle}" on Shelve. Can we discuss?`
+        );
+
+        const url = `https://wa.me/${phone}?text=${message}`;
+
+        window.open(url, "_blank");
+
+    } catch (err) {
+        console.error("Error contacting owner:", err);
+        alert("Could not contact owner");
+    }
+}

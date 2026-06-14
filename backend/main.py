@@ -106,13 +106,13 @@ def add(book : Book):
     cursor = conn.cursor();
 
     query = """
-    INSERT INTO books(title, author, genre, isbn, owner_flat, status)
-    VALUES (%s, %s, %s, %s, %s, 'available')
+    INSERT INTO books(title, author, genre, isbn, owner_flat, status, borrower_flat)
+    VALUES (%s, %s, %s, %s, %s, 'available', %s)
     """
 
     cursor.execute(
         query,
-        (book.title, book.author, book.genre, book.isbn, book.owner_flat)
+        (book.title, book.author, book.genre, book.isbn, book.owner_flat, None)
     )
 
     conn.commit()
@@ -197,3 +197,40 @@ def get_available(name : str):
     cursor.close();
     conn.close();
     return books;
+
+@app.get("/user/{flat_no}")
+def get_user(flat_no: str):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT name, phone_number, flat_number
+        FROM users
+        WHERE flat_number = %s
+    """, (flat_no,))
+
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return user
+
+@app.post("/books/update-status")
+def update_status(data: dict):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE books
+        SET status = %s
+            borrower_flat = %s
+        WHERE isbn = %s
+    """, (data["status"], data["borrower_flat"], data["isbn"]))
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return {"message": "Updated"}
