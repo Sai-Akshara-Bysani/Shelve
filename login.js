@@ -31,6 +31,14 @@ login_form.addEventListener("submit", async function login(e) {
     const data = await response.json();
 
     if(data.success){
+
+        localStorage.setItem(
+            "flat_no",
+            data.flat_no
+        );
+
+        localStorage.setItem("flat_no", flat);
+
         alert("Welcome " + data.username);
 
         window.location.href =
