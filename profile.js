@@ -4,9 +4,9 @@ const usernameEl = document.querySelector("#user_name");
 const lentCount = document.querySelector("#lent-count");
 const borrowedCount = document.querySelector("#borrowed-count");
 
-const borrowedContainer = document.querySelector("#borrowed-books-container");
+const borrowedBooksContainer = document.querySelector("#borrowed-books-container");
 const myBooksContainer = document.querySelector("#my-books-container");
-const requestsContainer = document.querySelector("#requests-container");
+const lentBooksContainer = document.querySelector("#lent-books-container");
 
 const logoutBtn = document.querySelector(".log-out");
 
@@ -27,18 +27,28 @@ async function loadProfile() {
             b => String(b.owner_flat) === String(myFlat)
         );
 
-        const borrowedBooks = books.filter(
-            b => b.status === "borrowed"
+        const borrowedRes = await fetch(
+            `http://127.0.0.1:8000/books/borrowed/${myFlat}`
         );
 
-        lentCount.textContent = myBooks.length;
+        const borrowedBooks = await borrowedRes.json();
+
+        const availableBooks = myBooks.filter(
+            book => book.status === "available"
+        );
+
+        const lentBooks = myBooks.filter(
+            book => book.status === "borrowed"
+        );
+
+        lentCount.textContent = lentBooks.length;
         borrowedCount.textContent = borrowedBooks.length;
 
         renderBooks(myBooksContainer, myBooks);
 
-        renderBooks(borrowedContainer, borrowedBooks);
+        renderBooks(lentBooksContainer, lentBooks);
 
-        requestsContainer.innerHTML = "<p>No borrow requests yet</p>";
+        renderBooks(borrowedBoksContainer, borrowedBooks);
 
     } catch (err) {
         console.error("Profile load error:", err);
@@ -58,17 +68,17 @@ function renderBooks(container, books) {
             <p>Status: ${book.status}</p>
             ${
                 book.borrower_flat
-                ? '<p>Borrowed by: ${book.borrower_flat}</p>'
+                ? `<p>Borrowed by: ${book.borrower_flat}</p>`
                 : ""
             }
 
             ${
                 book.status === "available"
-                ? `<button onclick="markBorrowed('${book.isbn}')">
+                ? `<button onclick='markBorrowed('${book.isbn}')'>
                     Mark Borrowed
                 </button>`
                 : `
-                <button onclick="markAvailable('${book.isbn}')">
+                <button onclick='markAvailable('${book.isbn}')'>
                     Mark Available
                 </button>
                 `

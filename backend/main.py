@@ -2,12 +2,17 @@ from fastapi import FastAPI
 from backend.database import get_connection
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from passlib.hash import bcrypt
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For development
+    # allow_origins=["*"],  # For development
+    allow_origins=[
+        "http://127.0.0.1:5500",
+        "http://localhost:5500"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,9 +40,11 @@ def signup(user: UserSignup):
     import mysql.connector
 
     try:
+        hashed_password = bcrypt.hash(user.password)
+
         cursor.execute(
             query,
-            (user.username, user.flat_no, user.phone_no, user.password)
+            (user.username, user.flat_no, user.phone_no, hashed_password)
         )
         conn.commit()
 
@@ -64,12 +71,12 @@ def login(user : LoginUser):
 
     query = """
     SELECT * FROM users
-    WHERE flat_number=%s AND password_hash=%s
+    WHERE flat_number=%s
     """
 
     cursor.execute(
         query,
-        (user.flat_no, user.password)
+        (user.flat_no,)
     )
 
     result = cursor.fetchone()
@@ -77,7 +84,10 @@ def login(user : LoginUser):
     cursor.close()
     conn.close()
 
-    if result:
+    if result and bcrypt.verify(
+        user.password,
+        result["password_hash"]
+    ):
         return {
             "success": True,
             "username": result["name"],
@@ -163,7 +173,7 @@ def get_genre(selected_genre : str):
 @app.get("/books/available")
 def get_available():
     conn = get_connection();
-    cursor = conn.cursor();
+    cursor = conn.cursor(dictionary=True);
 
     query = """
     SELECT * FROM books
@@ -179,7 +189,7 @@ def get_available():
     return books;
 
 @app.get("/books/search")
-def get_available(name : str):
+def get_book(name : str):
     conn = get_connection();
     cursor = conn.cursor(dictionary=True);
 
@@ -216,21 +226,48 @@ def get_user(flat_no: str):
 
     return user
 
+class StatusUpdate(BaseModel):
+    isbn: str
+    status: str
+    borrower_flat: str | None=None
+
 @app.post("/books/update-status")
-def update_status(data: dict):
+def update_status(data: StatusUpdate):
 
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
         UPDATE books
-        SET status = %s
+        SET status = %s,
             borrower_flat = %s
         WHERE isbn = %s
-    """, (data["status"], data["borrower_flat"], data["isbn"]))
+    """, (data.status, data.borrower_flat, data.isbn))
 
     conn.commit()
     cursor.close()
     conn.close()
 
     return {"message": "Updated"}
+
+@app.get("/books/borrowed/{flat_no}")
+def borrowed_books(flat_no: str):
+
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM books
+        WHERE borrower_flat = %s
+        """,
+        (flat_no,)
+    )
+
+    books = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return books
