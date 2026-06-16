@@ -2,11 +2,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial_scale=1.0">
-    <title>Add</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Book · Shelve</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="page">
 
 <header>
     <h2 class="logo">Shelve</h2>
@@ -15,88 +19,75 @@
 
 <main>
     <section class="add_book">
+        <h2>Add a Book to Our Collection</h2>
+        <h4>Type the book title and click on 'Find Book' to autofill the info</h4>
+        <br>
+
         <form id="book_form">
 
-            <label for="title">Book Title</label>
+            <div>
+                <label for="title">Book Title</label>
 
-            <div class="book-search">
+                <div class="book-search">
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Enter the book's name"
+                        required
+                    >
+
+                    <button type="button" id="find-book-btn">
+                        Find Book
+                    </button>
+                </div>
+
+                <div id="search-results"></div>
+            </div>
+
+            <div class="cover-preview">
+                <img id="cover-preview" src="" alt="Book Cover">
+            </div>
+
+            <div>
+                <label for="author">Book Author</label>
                 <input
                     type="text"
-                    id="title"
-                    placeholder="Enter the book's name"
+                    id="author"
+                    placeholder="Enter the book's author"
                     required
                 >
-
-                <button type="button"
-                    id="find-book-btn"
-                >
-                    Find Book
-                </button>
             </div>
 
-            <div class="cover-preview">
-                <img
-                    id="cover-preview"
-                    src=""
-                    alt="Book Cover"
-                >
+            <div>
+                <label for="category">Category</label>
+                <select id="category">
+                    <option value="">Select Category</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                    <option value="Self-Help">Self-Help</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Academic">Academic</option>
+                </select>
             </div>
 
-
-            <label for="author">Book Author</label>
-            <input
-                type="input"
-                id="author"
-                placeholder="Enter the book's author"
-                required
-            >
-
-            <label for="category">Category</label>
-            <select id="category">
-
-                <option value="">Select Category</option>
-                <option value="Fiction">Fiction</option>
-                <option value="Fantasy">Fantasy</option>
-                <option value="Thriller">Thriller</option>
-                <option value="Mystery">Mystery</option>
-                <option value="Romance">Romance</option>
-                <option value="Sci-Fi">Sci-Fi</option>
-                <option value="Self-Help">Self-Help</option>
-                <option value="Biography">Biography</option>
-                <option value="Academic">Academic</option>
-
-            </select>
-
-            <label for="description">Description</label>
-            <textarea
-                id="description"
-                rows="4"
-                placeholder="Optional notes about the book"
-            ></textarea>
-
-            <label for="isbn">ISBN</label>
-            <input
-                type="text"
-                id="isbn"
-                placeholder="ISBN"
-            >
-
-            <label for="cover">Book Cover</label>
-            <!-- <input
-                type="file"
-                id="cover"
-                accept="image/*"
-            > -->
-
-            <div class="cover-preview">
-                <img
-                    id="cover-preview"
-                    src=""
-                    alt="Book Cover"
-                >
+            <div>
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    rows="4"
+                    placeholder="Optional notes about the book"
+                ></textarea>
+                <p id="book-description"></p>
             </div>
 
-            <p id="book-description"></p>
+            <div>
+                <label for="isbn">ISBN</label>
+                <input type="text" id="isbn" placeholder="ISBN">
+            </div>
 
             <button type="submit">
                 Add Book
@@ -109,14 +100,13 @@
 
 <footer>
     <nav>
-        <a href="index.html" class="nav-active">Home</a>
+        <a href="index.html" class="nav">Home</a>
         <a href="search.html" class="nav">Search</a>
-        <a href="add.html" class="nav">Add</a>
+        <a href="add.html" class="nav-active">Add</a>
         <a href="profile.html" class="nav">Profile</a>
     </nav>
 </footer>
 
-</body>
-
 <script src="add.js"></script>
+</body>
 </html>

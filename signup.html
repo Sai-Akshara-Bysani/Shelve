@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SignUp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up · Shelve</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="page">
 
 <header>
     <h2 class="logo">Shelve</h2>
     <img src="logo.png" alt="Shelve logo">
 </header>
 
-<form id="signup-form">
+<main>
+    <section class="login-container">
 
-    <input
-        type="text"
-        id="username"
-        placeholder="Name"
-        required
-    >
+        <h2>Join Shelve</h2>
+        <h3>Create your account</h3>
 
-    <input
-        type="text"
-        id="flat_no"
-        placeholder="Flat Number (ex. A1-001)"
-        required
-    >
+        <form id="signup-form">
 
-    <input
-        type="tel"
-        id="phone_no"
-        placeholder="Phone Number"
-        required
-    >
+            <input type="text" id="username" placeholder="Name" required>
+            <input type="text" id="flat_no" placeholder="Flat Number (ex. A1-001)" required>
+            <input type="tel" id="phone_no" placeholder="Phone Number" required>
+            <input type="password" id="password" placeholder="Password" required>
 
-    <input
-        type="password"
-        id="password"
-        placeholder="Password"
-        required
-    >
+            <button type="submit">
+                Sign Up
+            </button>
 
-    <button type="submit">
-        Sign Up
-    </button>
+        </form>
 
-</form>
-
-</body>
+        <p>
+            Already have an account?
+            <a href="login.html">Log In</a>
+        </p>
+    </section>
+</main>
 
 <script src="signup.js"></script>
+</body>
 </html>

@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>My Books · Shelve</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="page">
 <header>
     <h2 class="logo">Shelve</h2>
     <img src="logo.png" alt="Shelve logo">
@@ -14,14 +18,10 @@
 
 <main>
     <section class="user">
-        <img src="profile.jpg" alt="Profile Picture">
         <h3 id="user_name"></h3>
-        <h4 class="books_borrowed"></h4>
-        <h4 class="books_lent"></h4>
     </section>
 
     <section class="stats">
-
         <div class="stat-card">
             <h3 id="lent-count">0</h3>
             <p>Books Lent</p>
@@ -31,26 +31,20 @@
             <h3 id="borrowed-count">0</h3>
             <p>Books Borrowed</p>
         </div>
-
     </section>
 
     <section class="borrowed-books">
         <h2>Currently Borrowed</h2>
-
-        <div id="borrowed-books-container">
-        </div>
+        <div id="borrowed-books-container"></div>
     </section>
 
     <section class="my-books">
         <h2>My Books</h2>
-
-        <div id="my-books-container">
-        </div>
+        <div id="my-books-container"></div>
     </section>
 
     <section class="lent-books">
         <h2>Books Lent Out</h2>
-
         <div id="lent-books-container"></div>
     </section>
 
@@ -65,7 +59,7 @@
         <a href="index.html" class="nav">Home</a>
         <a href="search.html" class="nav">Search</a>
         <a href="add.html" class="nav">Add</a>
-        <a href="profile.html" class="nav-active">Profile</a>
+        <a href="profile.html" class="nav-active">My Books</a>
     </nav>
 </footer>
 

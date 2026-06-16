@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <title>Search · Shelve</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="page">
 
 <header>
     <h2 class="logo">Shelve</h2>
@@ -16,43 +20,35 @@
 <main>
     <section class="search-section">
         <input type="text" id="search-input" placeholder="Search books, authors...">
-
         <button id="search-btn">Search</button>
     </section>
 
     <section class="filters">
-
         <select id="availability-filter">
             <option value="all">All Books</option>
             <option value="available">Available</option>
             <option value="borrowed">Borrowed</option>
         </select>
 
+        <select id="category">
+            <option value="">All Categories</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Romance">Romance</option>
+            <option value="Self-Help">Self-Help</option>
+            <option value="Biography">Biography</option>
+            <option value="Academic">Academic</option>
+        </select>
     </section>
 
     <section class="search-results">
-
         <h2>Books</h2>
 
         <div id="books-container">
         </div>
-
     </section>
-
-    <label for="category">Category</label>
-
-    <select id="category">
-
-        <option value="Thriller">Thriller</option>
-        <option value="Mystery">Mystery</option>
-        <option value="Fantasy">Fantasy</option>
-        <option value="Sci-Fi">Sci-Fi</option>
-        <option value="Romance">Romance</option>
-        <option value="Self-Help">Self-Help</option>
-        <option value="Biography">Biography</option>
-        <option value="Academic">Academic</option>
-
-    </select>
 
 </main>
 
@@ -61,11 +57,10 @@
         <a href="index.html" class="nav">Home</a>
         <a href="search.html" class="nav-active">Search</a>
         <a href="add.html" class="nav">Add</a>
-        <a href="profile.html" class="nav">Profile</a>
+        <a href="profile.html" class="nav">My Books</a>
     </nav>
 </footer>
 
-</body>
-
 <script src="search.js"></script>
+</body>
 </html>
