@@ -42,7 +42,7 @@ book_form.addEventListener("submit", async function add(e) {
     const isbn = document.querySelector("#isbn").value;
     const description = document.querySelector("#description").value;
 
-    const response = await fetch("http://127.0.0.1:8000/add", {
+    const response = await fetch("https://shelve-qjkx.onrender.com/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, author, genre, isbn, owner_flat, cover_url, description })

@@ -16,13 +16,13 @@ usernameEl.textContent = user.username;
 
 async function loadProfile() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/books");
+        const res = await fetch("https://shelve-qjkx.onrender.com/books");
         const books = await res.json();
 
         const myFlat = user.flat_no;
         const myBooks = books.filter(b => String(b.owner_flat) === String(myFlat));
 
-        const borrowedRes = await fetch(`http://127.0.0.1:8000/books/borrowed/${myFlat}`);
+        const borrowedRes = await fetch(`https://shelve-qjkx.onrender.com/books/borrowed/${myFlat}`);
         const borrowedBooks = await borrowedRes.json();
 
         const lentBooks = myBooks.filter(book => book.status === "borrowed");
@@ -137,7 +137,7 @@ function attachCardEvents() {
 }
 
 async function markAvailable(isbn) {
-    await fetch("http://127.0.0.1:8000/books/update-status", {
+    await fetch("https://shelve-qjkx.onrender.com/books/update-status", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -154,7 +154,7 @@ async function markBorrowed(isbn) {
     const borrowerFlat = prompt("Enter borrower's flat number:");
     if (!borrowerFlat) return;
 
-    await fetch("http://127.0.0.1:8000/books/update-status", {
+    await fetch("https://shelve-qjkx.onrender.com/books/update-status", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -173,8 +173,8 @@ async function deleteBook(isbn, title) {
 
     try {
         const url = isbn
-            ? `http://127.0.0.1:8000/books/${encodeURIComponent(isbn)}?owner_flat=${encodeURIComponent(user.flat_no)}`
-            : `http://127.0.0.1:8000/books/by-title/${encodeURIComponent(title)}?owner_flat=${encodeURIComponent(user.flat_no)}`;
+            ? `https://shelve-qjkx.onrender.com/books/${encodeURIComponent(isbn)}?owner_flat=${encodeURIComponent(user.flat_no)}`
+            : `https://shelve-qjkx.onrender.com/books/by-title/${encodeURIComponent(title)}?owner_flat=${encodeURIComponent(user.flat_no)}`;
 
         const res = await fetch(url, { method: "DELETE" });
 

@@ -14,11 +14,11 @@ async function fetchBooks() {
 
         let url = "";
         if (query) {
-            url = `http://127.0.0.1:8000/books/search?name=${query}`;
+            url = `https://shelve-qjkx.onrender.com/books/search?name=${query}`;
         } else if (category) {
-            url = `http://127.0.0.1:8000/books/genre/${category}`;
+            url = `https://shelve-qjkx.onrender.com/books/genre/${category}`;
         } else {
-            url = `http://127.0.0.1:8000/books`;
+            url = `https://shelve-qjkx.onrender.com/books`;
         }
 
         const response = await fetch(url);
@@ -122,7 +122,7 @@ function showDesc(title, desc) {
 
 async function contactOwner(ownerFlat, bookTitle) {
     try {
-        const res = await fetch(`http://127.0.0.1:8000/user/${ownerFlat}`);
+        const res = await fetch(`https://shelve-qjkx.onrender.com/user/${ownerFlat}`);
         const owner = await res.json();
         const message = encodeURIComponent(
             `Hi ${owner.name}, I'm interested in your book "${bookTitle}" on Shelve. Can we discuss?`
