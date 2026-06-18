@@ -11,6 +11,11 @@
 
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+
+    <script>
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) window.location.href = "login.html";
+    </script>
 </head>
 
 <body class="page">
