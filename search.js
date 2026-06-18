@@ -125,7 +125,14 @@ async function contactOwner(ownerFlat, bookTitle) {
         const res = await fetch(`https://shelve-qjkx.onrender.com/user/${ownerFlat}`);
         const owner = await res.json();
         const message = encodeURIComponent(
-            `Hi ${owner.name}, I'm interested in your book "${bookTitle}" on Shelve. Can we discuss?`
+            `Hi ${owner.name}, I'm interested in your book "${bookTitle}" on Shelve.
+
+        My flat number is ${user.flat_no}.
+
+        If you're happy to lend it, could we discuss a suitable time and place for collection?
+
+        After lending the book, you can update its status directly from your profile:
+        https://sai-akshara-bysani.github.io/Shelve/profile.html`
         );
         window.open(`https://wa.me/${owner.phone_number}?text=${message}`, "_blank");
     } catch (err) {
