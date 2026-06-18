@@ -3,11 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Books · Shelve</title>
+    <title>About · Shelve</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== About page overrides ===== */
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem calc(2rem + 56px);
+            gap: 0;
+        }
+
+        /* Hero block */
+        .about-hero {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.75rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .about-hero-icon {
+            font-size: 2.25rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .about-hero h1 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+            color: #fff;
+        }
+
+        .about-hero p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+        }
+
+        /* Section label (eyebrow) */
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.55);
+            margin: 0 0 0.65rem;
+            padding-left: 2px;
+        }
+
+        /* How-to steps grid */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            padding: 1rem;
+        }
+
+        .step-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .step-card h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 0.35rem;
+        }
+
+        .step-card p {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.78);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* FAQ cards */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .faq-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+        }
+
+        .faq-card h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 0.4rem;
+        }
+
+        .faq-card p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            line-height: 1.65;
+        }
+
+        .faq-card p + p {
+            margin-top: 0.5rem;
+        }
+
+        /* Creator card */
+        .creator-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            padding: 1.1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .creator-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: var(--font-display);
+        }
+
+        .creator-body p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.82);
+            margin: 0 0 0.5rem;
+            line-height: 1.65;
+        }
+
+        .creator-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .creator-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 8px;
+            padding: 4px 10px;
+            transition: background 0.2s;
+        }
+
+        .creator-link:hover {
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .about-hero {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
 </head>
 
 <body class="page">
@@ -18,120 +220,76 @@
 
 <main class="about-container">
 
-    <section>
-        <h1>What is Shelve?</h1>
-        <br>
+    <!-- What is Shelve -->
+    <div class="about-hero">
+        <div>
+            <h1>What is Shelve?</h1>
+            <p>
+                Shelve is a community book lending and borrowing platform that
+                enables easy sharing of books within apartments, colleges, or
+                local communities. Often we find ourselves craving a good read, 
+                easily accessible or we notice a booksehlf of lifeless books, 
+                collecting dust. Shelve creates a new cycle of life for books
+                and through this, brings the community closer.
+            </p>
+        </div>
+    </div>
 
-        <p>
-            Shelve is a community book lending and borrowing platform that
-            enables easy sharing of books within apartments, colleges, or
-            local communities. Often we find ourselves craving a good read, 
-            easily accessible or we notice a booksehlf of lifeless books, 
-            collecting dust. Shelve creates a new cycle of life for books
-            and through this, brings the community closer.
+    <!-- How to Use -->
+    <p class="section-label">How to Use Shelve?</p>
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Add a Book</h3>
+            <p>Go to the Add page and enter the book title, author, genre, and owner details.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>Browse the Collection</h3>
+            <p>Visit the Browse page to see all books currently listed in the community. Filter by genre or search for a particular author or book.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>Borrow a Book</h3>
+            <p>If a book is available, click Interested. Contact the owner through WhatsApp to discuss lending conditions and arrange a time and place for the exchange.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-num">4</div>
+            <h3>Mark Book as Borrowed</h3>
+            <p>Once a book is lent out, the owner should mark it as Borrowed so other users know it is currently unavailable.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-num">5</div>
+            <h3>Return a Book</h3>
+            <p>Once returned, the owner must mark it as Available again so the next reader can borrow it.</p>
+        </div>
+    </div>
 
-        </p>
-    </section>
+    <!-- FAQs -->
+    <p class="section-label">FAQs</p>
+    <div class="faq-list">
+        <div class="faq-card">
+            <h3>How do I lend my book?</h3>
+            <p>Click on the Add section and fill in the book title. Click on "Find Book" and select the correct book. The rest of the details autofill.</p>
+            <p>After adding a book, if an interested person requests to borrow, chat with them on WhatsApp and decide on an agreed time and place to collect the book.</p>
+            <p>On the app, change the status of the book to "Borrowed" and once it is returned mark it back as "Available".</p>
+        </div>
+        <div class="faq-card">
+            <h3>Can I trust another person with my book?</h3>
+            <p>Shelve is built around communities of readers who share a common interest in books. While users are expected to treat borrowed books responsibly, any issues regarding damage or loss should be resolved directly between the lender and borrower.</p>
+        </div>
+    </div>
 
-    <section>
-        <h1>How to Use Shelve?</h1>
-        <br>
-
-        <h3>Add a Book</h3>
-        <p>
-            Go to the Add page and enter the book title, author, genre,
-            and owner details.
-        </p>
-        <br>
-
-        <h3>Browse the Collection</h3>
-        <p>
-            Visit the Browse page to see all books currently listed in the
-            community. Filter by genre or search for a particular author
-            or book.
-        </p>
-        <br>
-        
-        <h3>Borrow a Book</h3>
-        <p>
-            If a book is available, click Interested. Contact the owner
-            through WhatsApp to discuss lending conditions and arrange a
-            time and place for the exchange. Once the book is lent out,
-            the owner should mark it as Borrowed so other users know it
-            is currently unavailable.
-        </p>
-        <br>
-
-        <h3>Return a Book</h3>
-        <p>
-            Once returned, the owner must mark it as Available again so
-            the next reader can borrow it.
-        </p>
-    </section>
-
-    <section>
-        <h1>FAQs</h1>
-        <br>
-
-        <h3>How do I lend my book?</h3>
-
-        <p>
-            Click on the Add section and fill in the book title.
-            Click on "Find Book" and select the correct book.
-            The rest of the details autofill.
-        </p>
-
-        <p>
-            After adding a book, if an interested person requests to borrow,
-            chat with them on WhatsApp and decide on an agreed time and place
-            to collect the book.
-        </p>
-
-        <p>
-            On the app, change the status of the book to "Borrowed" and once
-            it is returned mark it back as "Available".
-        </p>
-        <br>
-
-        <h3>Can I trust another person with my book?</h3>
-
-        <p>
-            Shelve is built around communities of readers who share a common
-            interest in books. While users are expected to treat borrowed
-            books responsibly, any issues regarding damage or loss should be
-            resolved directly between the lender and borrower.
-        </p>
-    </section>
-
-    <section>
-        <h1>About the Creator</h1>
-        <br>
-
-        <p>
-            Hi, I'm Akshara, a computer science student passionate about
-            building practical web applications.
-        </p>
-        <br>
-
-        <p>
-            Shelve was created as a project to combine HTML, CSS, and
-            JavaScript frontend development, FastAPI backend development,
-            and MySQL database integration into a real-world
-            community-focused app.
-        </p>
-
-        <p>
-            Connect with me on
-            <button>
-                <a href="https://www.linkedin.com/in/sai-akshara-bysani-13855b377/"
-                    target="_blank">
-                    LinkedIn
-                </a>.
-            </button>
-        </p>
-    </section>
-
-    
+    <!-- About the Creator -->
+    <p class="section-label">About the Creator</p>
+    <div class="creator-card">
+        <div class="creator-avatar">A</div>
+        <div class="creator-body">
+            <p>Hi, I'm Akshara, a computer science student passionate about building practical web applications.</p>
+            <p>Shelve was created as a project to combine HTML, CSS, and JavaScript frontend development, FastAPI backend development, and MySQL database integration into a real-world community-focused app.</p>
+            <p>Connect with me on <a class="creator-link" href="https://www.linkedin.com/in/sai-akshara-bysani-13855b377/" target="_blank">LinkedIn</a>.</p>
+        </div>
+    </div>
 
 </main>
 
