@@ -5,8 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from passlib.hash import bcrypt
 import mysql.connector
 
-from backend.ai_reccomend import router as recommend_router
-from backend.ai_search import router as ai_search_router
+from ai.ai_reccomend import router as recommend_router
+from ai.ai_search import router as ai_search_router
 
 app = FastAPI()
 
