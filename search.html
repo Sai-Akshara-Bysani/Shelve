@@ -16,6 +16,115 @@
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user) window.location.href = "login.html";
     </script>
+
+    <style>
+        /* Chat buddy widget — scoped styles so it doesn't depend on style.css */
+        #chat-toggle {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: #2f2a25;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            z-index: 1000;
+        }
+
+        #chat-panel {
+            position: fixed;
+            bottom: 156px;
+            right: 20px;
+            width: 320px;
+            max-width: calc(100vw - 40px);
+            height: 420px;
+            max-height: calc(100vh - 220px);
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        #chat-panel.hidden { display: none; }
+
+        #chat-header {
+            background: #2f2a25;
+            color: #fff;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Fraunces', serif;
+        }
+
+        #chat-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: #f7f4ef;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .chat-bot, .chat-bot-loading {
+            background: #fff;
+            border: 1px solid #e3ddd2;
+            align-self: flex-start;
+        }
+
+        .chat-bot-loading { opacity: 0.6; font-style: italic; }
+
+        .chat-user {
+            background: #2f2a25;
+            color: #fff;
+            align-self: flex-end;
+        }
+
+        #chat-input-row {
+            display: flex;
+            border-top: 1px solid #e3ddd2;
+        }
+
+        #chat-input {
+            flex: 1;
+            border: none;
+            padding: 10px 12px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #chat-send {
+            border: none;
+            background: #2f2a25;
+            color: #fff;
+            padding: 0 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="page">
@@ -27,7 +136,7 @@
 
 <main>
     <section class="search-section">
-        <input type="text" id="search-input" placeholder="Search books, authors...">
+        <input type="text" id="search-input" placeholder="Search books, authors... (try plain English!)">
         <button id="search-btn">Search</button>
     </section>
 
@@ -59,6 +168,20 @@
     </section>
 
 </main>
+
+<!-- Shelve Buddy chat widget -->
+<button id="chat-toggle" title="Ask Shelve Buddy">💬</button>
+<div id="chat-panel" class="hidden">
+    <div id="chat-header">
+        <span>Shelve Buddy</span>
+        <button id="chat-close">✕</button>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-row">
+        <input id="chat-input" placeholder="What are you looking for?">
+        <button id="chat-send">Send</button>
+    </div>
+</div>
 
 <footer>
     <nav>

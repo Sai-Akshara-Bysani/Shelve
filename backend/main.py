@@ -5,6 +5,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from passlib.hash import bcrypt
 import mysql.connector
 
+from backend.ai_reccomend import router as recommend_router
+from backend.ai_search import router as ai_search_router
+
 app = FastAPI()
 
 app.add_middleware(
@@ -14,6 +17,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# AI feature routers (recommend, ai-search)
+app.include_router(recommend_router)
+app.include_router(ai_search_router)
+
 
 class UserSignup(BaseModel):
     username: str
