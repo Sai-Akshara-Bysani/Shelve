@@ -1,7 +1,5 @@
 const API = "https://shelve-qjkx.onrender.com";
 
-const user = JSON.parse(localStorage.getItem("user"));
-
 const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const categorySelect = document.querySelector("#category");
