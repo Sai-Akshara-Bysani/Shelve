@@ -225,13 +225,13 @@ async function sendChatMessage() {
         if (!searchData.error && searchData.results && searchData.results.length) {
             loading.remove();
             const count = searchData.results.length;
-            appendChatMessage(`Found ${count} book${count > 1 ? "s" : ""} that match — check them out below!`);
+            appendChatMessage(`Found ${count} book${count > 1 ? "s" : ""} that match${count > 1 ? "es" : ""}, check them out below!`);
             showBuddyResults(searchData.results);
             return;
         }
 
         // Step 2 — nothing matched directly, fall back to taste-based recommendations
-        loading.textContent = "Nothing matched directly — let me think of something close...";
+        loading.textContent = "Nothing matched directly, let me think of something close...";
 
         const recRes = await fetch(`${API}/recommend`, {
             method: "POST",
@@ -247,7 +247,7 @@ async function sendChatMessage() {
         }
 
         if (recData.error) {
-            appendChatMessage("I couldn't quite place that one — could you try rephrasing?");
+            appendChatMessage("I couldn't quite place that one, could you try rephrasing?");
             return;
         }
 
@@ -256,7 +256,7 @@ async function sendChatMessage() {
             appendChatMessage("Couldn't find an exact match, but here's what I'd recommend instead:");
             showBuddyResults(recs);
         } else {
-            appendChatMessage("No luck this time — try describing it a bit differently?");
+            appendChatMessage("No luck this time, try describing it a bit differently?");
         }
 
     } catch (err) {
@@ -268,8 +268,18 @@ async function sendChatMessage() {
 
 chatToggle.addEventListener("click", () => {
     chatPanel.classList.toggle("hidden");
+
     if (!chatPanel.classList.contains("hidden") && !chatMessages.dataset.greeted) {
-        appendChatMessage("Hi! I'm your Shelve buddy 📚 Tell me what you're looking for — I'll search the shelves, and if nothing matches exactly, I'll suggest something close.");
+        appendChatMessage(`Hi! I'm Shelvy, your Shelve buddy!
+
+Tell me what you're looking for :)
+
+Examples:
+• I love Harry Potter, what are similar options?
+• Is the book Little Women available?
+• Who is the owner of Dark Matter?
+• Books by Rick Riordan please!`);
+
         chatMessages.dataset.greeted = "1";
     }
 });
