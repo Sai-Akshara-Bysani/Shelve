@@ -276,8 +276,6 @@ Tell me what you're looking for :)
 
 Examples:
 • I love Harry Potter, what are similar options?
-• Is the book Little Women available?
-• Who is the owner of Dark Matter?
 • Books by Rick Riordan please!`);
 
         chatMessages.dataset.greeted = "1";
